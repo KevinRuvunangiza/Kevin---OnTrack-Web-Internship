@@ -3,129 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medi-Connect | Healthcare Management</title>
+    <title>Medi-Connect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <!-- LOGIN VIEW (Role-Based Access) -->
+    <!-- AMBIENT BACKGROUND -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- LOGIN VIEW -->
     <div id="login-view" class="view-section active-view full-screen-flex">
-        <div class="login-card bento-card">
-            <div class="brand-header">
-                <div class="logo-icon"></div>
-                <h1>Medi-Connect</h1>
-                <p class="text-muted">Select a role to enter the portal</p>
+        <div class="login-wrapper">
+            <div class="login-eyebrow">Healthcare Management Platform</div>
+            <h1 class="login-title">Medi<span class="accent-dot">·</span>Connect</h1>
+            <p class="login-subtitle">Secure access to your healthcare portal.<br>Select your role to continue.</p>
+
+            <div class="login-cards">
+                <button class="role-card" onclick="login('patient')">
+                    <div class="role-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="role-info">
+                        <div class="role-label">Patient</div>
+                        <div class="role-desc">View appointments & records</div>
+                    </div>
+                    <div class="role-arrow">→</div>
+                </button>
+                <button class="role-card" onclick="login('doctor')">
+                    <div class="role-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <div class="role-info">
+                        <div class="role-label">Doctor</div>
+                        <div class="role-desc">Manage schedule & patients</div>
+                    </div>
+                    <div class="role-arrow">→</div>
+                </button>
+                <button class="role-card" onclick="login('admin')">
+                    <div class="role-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+                    </div>
+                    <div class="role-info">
+                        <div class="role-label">Administrator</div>
+                        <div class="role-desc">System analytics & oversight</div>
+                    </div>
+                    <div class="role-arrow">→</div>
+                </button>
             </div>
-            <div class="login-actions">
-                <button class="btn btn-primary" onclick="login('patient')">Login as Patient</button>
-                <button class="btn btn-secondary" onclick="login('doctor')">Login as Doctor</button>
-                <button class="btn btn-outline" onclick="login('admin')">Login as Admin</button>
+
+            <div class="login-footer">
+                <span class="status-dot"></span> All systems operational
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP LAYOUT (Hidden until login) -->
+    <!-- MAIN APP LAYOUT -->
     <div id="app-layout" class="app-container hidden">
-        
-        <!-- SIDEBAR NAVIGATION -->
+
+        <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-icon small"></div>
-                <h2 class="sidebar-brand">Medi-Connect</h2>
+            <div class="sidebar-top">
+                <div class="sidebar-brand">
+                    <span class="brand-mark">M</span>
+                    <span class="brand-name">Medi<span class="accent-dot">·</span>Connect</span>
+                </div>
+                <div id="user-badge" class="user-badge"></div>
             </div>
-            
-            <!-- Navigation links are dynamically populated by JS based on role -->
+
             <nav id="dynamic-nav" class="nav-menu"></nav>
-            
-            <div class="sidebar-footer">
-                <button class="btn btn-text text-danger" onclick="logout()">Log Out</button>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-divider"></div>
+                <button class="logout-btn" onclick="logout()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Sign Out
+                </button>
             </div>
         </aside>
 
-        <!-- MAIN CONTENT AREA -->
+        <!-- MAIN CONTENT -->
         <main class="main-content">
-            <!-- Header for mobile menu toggle and user profile -->
             <header class="top-header">
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menu</button>
-                <div class="user-profile">
-                    <span id="user-greeting" class="font-medium">Welcome</span>
-                    <div class="avatar"></div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <div id="page-title" class="page-title">Dashboard</div>
+                <div class="header-right">
+                    <div class="header-time" id="live-time"></div>
+                    <div class="notif-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="notif-badge">3</span>
+                    </div>
+                    <div id="header-avatar" class="header-avatar"></div>
                 </div>
             </header>
 
             <div class="scrollable-content">
-                
+
                 <!-- PATIENT DASHBOARD -->
-                <section id="patient-dashboard" class="view-section bento-grid">
-                    <div class="bento-card span-2">
-                        <h3>Book an Appointment</h3>
-                        <p class="text-muted mb-4">Schedule a visit with your healthcare provider.</p>
-                        <form class="booking-form" onsubmit="event.preventDefault(); alert('Appointment requested!');">
-                            <input type="date" class="form-input" required>
-                            <select class="form-input" required>
-                                <option value="" disabled selected>Select Doctor</option>
-                                <option>Dr. Reynolds (General)</option>
-                                <option>Dr. Patel (Cardiology)</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary">Confirm Booking</button>
-                        </form>
+                <section id="patient-dashboard" class="view-section hidden">
+                    <div class="section-hero">
+                        <div class="hero-text">
+                            <div class="hero-eyebrow">Good morning</div>
+                            <h2 class="hero-title" id="patient-name">Sarah Connor</h2>
+                            <p class="hero-sub">You have <strong>2 upcoming appointments</strong> this month.</p>
+                        </div>
+                        <div class="hero-art">
+                            <div class="pulse-ring r1"></div>
+                            <div class="pulse-ring r2"></div>
+                            <div class="pulse-ring r3"></div>
+                            <div class="pulse-core">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bento-card">
-                        <h3>Upcoming Visits</h3>
-                        <div id="patient-appts-list" class="data-list"></div>
-                    </div>
-                </section>
 
-                <!-- HEALTH EDUCATION PORTAL -->
-                <section id="education-portal" class="view-section bento-grid hidden">
-                    <div class="bento-card span-full">
-                        <h3>Health Education Resources</h3>
-                        <p class="text-muted mb-4">Curated medical information for your well-being.</p>
-                        <div id="education-list" class="grid-2-col"></div>
-                    </div>
-                </section>
+                    <div class="grid-layout">
+                        <div class="glass-card span-2">
+                            <div class="card-header">
+                                <div class="card-title">Book Appointment</div>
+                                <div class="card-tag">New</div>
+                            </div>
+                            <div class="booking-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Select Date</label>
+                                        <input type="date" class="form-input" id="booking-date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Preferred Time</label>
+                                        <select class="form-input" id="booking-time">
+                                            <option>09:00 AM</option>
+                                            <option>10:30 AM</option>
+                                            <option>01:00 PM</option>
+                                            <option>03:30 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Select Physician</label>
+                                    <div class="doctor-selector">
+                                        <div class="doc-option selected" data-doc="Dr. Reynolds">
+                                            <div class="doc-avatar dr1">R</div>
+                                            <div>
+                                                <div class="doc-name">Dr. Reynolds</div>
+                                                <div class="doc-spec">General Practice</div>
+                                            </div>
+                                        </div>
+                                        <div class="doc-option" data-doc="Dr. Patel">
+                                            <div class="doc-avatar dr2">P</div>
+                                            <div>
+                                                <div class="doc-name">Dr. Patel</div>
+                                                <div class="doc-spec">Cardiology</div>
+                                            </div>
+                                        </div>
+                                        <div class="doc-option" data-doc="Dr. Kim">
+                                            <div class="doc-avatar dr3">K</div>
+                                            <div>
+                                                <div class="doc-name">Dr. Kim</div>
+                                                <div class="doc-spec">Neurology</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-primary-pill" onclick="bookAppointment()">Confirm Appointment →</button>
+                            </div>
+                        </div>
 
-                <!-- SECURE MESSAGING -->
-                <section id="messaging-portal" class="view-section bento-grid hidden">
-                    <div class="bento-card span-full chat-container">
-                        <h3>Secure Inbox</h3>
-                        <div id="chat-history" class="chat-history"></div>
-                        <div class="chat-input-area">
-                            <input type="text" class="form-input" placeholder="Type a secure message...">
-                            <button class="btn btn-primary">Send</button>
+                        <div class="glass-card">
+                            <div class="card-header">
+                                <div class="card-title">Upcoming Visits</div>
+                                <div class="card-link">View all</div>
+                            </div>
+                            <div id="patient-appts-list" class="data-list"></div>
+                        </div>
+
+                        <div class="glass-card stat-mini">
+                            <div class="mini-label">Next Visit</div>
+                            <div class="mini-value">Oct 24</div>
+                            <div class="mini-sub">Dr. Reynolds · 10:00 AM</div>
+                        </div>
+                        <div class="glass-card stat-mini">
+                            <div class="mini-label">Health Score</div>
+                            <div class="mini-value">94<span class="mini-unit">%</span></div>
+                            <div class="mini-bar"><div class="mini-fill" style="width:94%"></div></div>
                         </div>
                     </div>
                 </section>
 
-                <!-- DOCTOR DASHBOARD (Schedule & Records) -->
-                <section id="doctor-dashboard" class="view-section bento-grid hidden">
-                    <div class="bento-card span-2">
-                        <h3>Today's Schedule</h3>
-                        <div id="doctor-schedule-list" class="data-list"></div>
+                <!-- HEALTH EDUCATION -->
+                <section id="education-portal" class="view-section hidden">
+                    <div class="section-hero compact">
+                        <div class="hero-text">
+                            <div class="hero-eyebrow">Library</div>
+                            <h2 class="hero-title">Health Education</h2>
+                            <p class="hero-sub">Curated resources from our medical team.</p>
+                        </div>
                     </div>
-                    <div class="bento-card">
-                        <h3>Patient Directory</h3>
-                        <div id="patient-records-list" class="data-list"></div>
-                        <button class="btn btn-secondary mt-4 w-full">View All Records</button>
+                    <div class="search-bar-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input type="text" class="search-input" placeholder="Search resources…" oninput="filterResources(this.value)">
+                    </div>
+                    <div id="education-list" class="edu-grid"></div>
+                </section>
+
+                <!-- MESSAGING -->
+                <section id="messaging-portal" class="view-section hidden">
+                    <div class="chat-layout">
+                        <div class="chat-sidebar">
+                            <div class="chat-sidebar-title">Conversations</div>
+                            <div class="convo-list">
+                                <div class="convo-item active">
+                                    <div class="convo-avatar dr1">R</div>
+                                    <div class="convo-info">
+                                        <div class="convo-name">Dr. Reynolds</div>
+                                        <div class="convo-preview">Test results look great…</div>
+                                    </div>
+                                    <div class="convo-time">2h</div>
+                                </div>
+                                <div class="convo-item">
+                                    <div class="convo-avatar dr2">P</div>
+                                    <div class="convo-info">
+                                        <div class="convo-name">Dr. Patel</div>
+                                        <div class="convo-preview">Please confirm your next…</div>
+                                    </div>
+                                    <div class="convo-time">1d</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-main">
+                            <div class="chat-header-bar">
+                                <div class="convo-avatar dr1">R</div>
+                                <div>
+                                    <div class="chat-contact-name">Dr. Reynolds</div>
+                                    <div class="chat-contact-status"><span class="online-dot"></span> Online</div>
+                                </div>
+                            </div>
+                            <div id="chat-history" class="chat-history"></div>
+                            <div class="chat-input-area">
+                                <input type="text" class="chat-input" placeholder="Type a secure message…" id="msg-input" onkeydown="if(event.key==='Enter')sendMessage()">
+                                <button class="send-btn" onclick="sendMessage()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DOCTOR DASHBOARD -->
+                <section id="doctor-dashboard" class="view-section hidden">
+                    <div class="section-hero">
+                        <div class="hero-text">
+                            <div class="hero-eyebrow">Thursday, October 24</div>
+                            <h2 class="hero-title">Dr. Reynolds</h2>
+                            <p class="hero-sub">You have <strong>4 patients</strong> scheduled today.</p>
+                        </div>
+                        <div class="doc-stats-row">
+                            <div class="doc-stat"><div class="doc-stat-val">4</div><div class="doc-stat-label">Today</div></div>
+                            <div class="doc-stat"><div class="doc-stat-val">2</div><div class="doc-stat-label">Pending</div></div>
+                            <div class="doc-stat"><div class="doc-stat-val">18</div><div class="doc-stat-label">This Week</div></div>
+                        </div>
+                    </div>
+                    <div class="grid-layout">
+                        <div class="glass-card span-2">
+                            <div class="card-header">
+                                <div class="card-title">Today's Schedule</div>
+                                <div class="card-tag teal">Live</div>
+                            </div>
+                            <div id="doctor-schedule-list" class="schedule-list"></div>
+                        </div>
+                        <div class="glass-card">
+                            <div class="card-header">
+                                <div class="card-title">Patient Directory</div>
+                                <button class="card-action-btn" onclick="switchView('patient-records', null)">View All</button>
+                            </div>
+                            <div id="patient-records-list" class="data-list"></div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- ADMIN DASHBOARD -->
-                <section id="admin-dashboard" class="view-section bento-grid hidden">
-                    <div class="bento-card stat-card">
-                        <h4 class="text-muted">Total Appointments</h4>
-                        <div class="stat-value" id="stat-appts">0</div>
+                <section id="admin-dashboard" class="view-section hidden">
+                    <div class="section-hero compact">
+                        <div class="hero-text">
+                            <div class="hero-eyebrow">System Overview</div>
+                            <h2 class="hero-title">Analytics</h2>
+                        </div>
+                        <div class="system-status">
+                            <span class="status-dot pulse"></span> All Systems Optimal
+                        </div>
                     </div>
-                    <div class="bento-card stat-card">
-                        <h4 class="text-muted">Active Patients</h4>
-                        <div class="stat-value" id="stat-patients">0</div>
+                    <div class="stats-row">
+                        <div class="stat-block">
+                            <div class="stat-label">Total Appointments</div>
+                            <div class="stat-num" id="stat-appts" data-target="142">0</div>
+                            <div class="stat-trend up">↑ 12% this month</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-label">Active Patients</div>
+                            <div class="stat-num" id="stat-patients" data-target="89">0</div>
+                            <div class="stat-trend up">↑ 5 new this week</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-label">Avg. Wait Time</div>
+                            <div class="stat-num">12<span style="font-size:1.5rem">min</span></div>
+                            <div class="stat-trend down">↓ 3min improvement</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-label">Satisfaction</div>
+                            <div class="stat-num">98<span style="font-size:1.5rem">%</span></div>
+                            <div class="stat-trend up">↑ 2% from last quarter</div>
+                        </div>
                     </div>
-                    <div class="bento-card stat-card">
-                        <h4 class="text-muted">System Status</h4>
-                        <div class="stat-value text-success">Optimal</div>
-                    </div>
-                    <div class="bento-card span-full">
-                        <h3>Recent System Activity</h3>
+                    <div class="glass-card full-w">
+                        <div class="card-header">
+                            <div class="card-title">System Activity Log</div>
+                            <div class="card-tag">Live</div>
+                        </div>
                         <div id="admin-activity-list" class="data-list"></div>
                     </div>
                 </section>
@@ -133,6 +334,8 @@
             </div>
         </main>
     </div>
+
+    <div id="toast" class="toast hidden"></div>
 
     <script src="./app.js"></script>
 </body>
