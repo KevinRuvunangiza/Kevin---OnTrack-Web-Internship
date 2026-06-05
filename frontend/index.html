@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi-Connect | Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation with Glassmorphism effect -->
+    <header class="app-header">
+        <div class="logo">Medi-Connect</div>
+        <nav class="role-nav">
+            <!-- Buttons to toggle between role views for the prototype -->
+            <button class="nav-btn active" onclick="switchRole('patient')">Patient</button>
+            <button class="nav-btn" onclick="switchRole('doctor')">Doctor</button>
+            <button class="nav-btn" onclick="switchRole('admin')">Admin</button>
+        </nav>
+        <div class="user-profile">
+            <div class="avatar"></div>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <!-- PATIENT DASHBOARD VIEW -->
+        <section id="patient-view" class="role-view active-view">
+            <header class="view-header">
+                <h1>Hello, Sarah</h1>
+                <p class="subtitle">Here is your health overview.</p>
+            </header>
+            
+            <div class="grid-layout">
+                <!-- Appointment Booking Card -->
+                <article class="card">
+                    <h2>Upcoming Appointments</h2>
+                    <div id="patient-appointments-list" class="list-container">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <button class="primary-btn mt-4">Book New Appointment</button>
+                </article>
+
+                <!-- Health Education Portal Card -->
+                <article class="card">
+                    <h2>Health Resources</h2>
+                    <ul id="health-resources-list" class="resource-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- DOCTOR DASHBOARD VIEW -->
+        <section id="doctor-view" class="role-view">
+            <header class="view-header">
+                <h1>Dr. Reynolds Overview</h1>
+                <p class="subtitle">Your schedule for today.</p>
+            </header>
+            
+            <div class="grid-layout">
+                <!-- Doctor Schedule Card -->
+                <article class="card">
+                    <h2>Today's Schedule</h2>
+                    <div id="doctor-schedule-list" class="list-container">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </article>
+
+                <!-- Patient Records Quick Access -->
+                <article class="card">
+                    <h2>Recent Patient Records</h2>
+                    <div id="doctor-patients-list" class="list-container">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <button class="secondary-btn mt-4">Search All Records</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD VIEW -->
+        <section id="admin-view" class="role-view">
+            <header class="view-header">
+                <h1>Clinic Administration</h1>
+                <p class="subtitle">System overview and analytics.</p>
+            </header>
+            
+            <div class="grid-layout admin-grid">
+                <!-- Analytics Cards -->
+                <article class="card stat-card">
+                    <h3>Total Appointments</h3>
+                    <p class="stat-number" id="stat-appointments">--</p>
+                </article>
+                <article class="card stat-card">
+                    <h3>Active Patients</h3>
+                    <p class="stat-number" id="stat-patients">--</p>
+                </article>
+                <article class="card stat-card">
+                    <h3>System Status</h3>
+                    <p class="stat-number status-online">Online</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
