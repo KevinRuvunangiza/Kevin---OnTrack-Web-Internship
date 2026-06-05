@@ -1,0 +1,266 @@
+{
+  "patient": {
+    "name": "Sarah Connor",
+    "initials": "SC",
+    "role": "Patient"
+  },
+  "doctor": {
+    "name": "Dr. Reynolds",
+    "initials": "DR",
+    "role": "Doctor",
+    "specialty": "General Practice"
+  },
+  "admin": {
+    "name": "Admin User",
+    "initials": "AU",
+    "role": "Administrator"
+  },
+
+  "appointments": [
+    {
+      "id": "appt-001",
+      "patientName": "Sarah Connor",
+      "patientInitials": "SC",
+      "doctor": "Dr. Reynolds",
+      "doctorInitials": "R",
+      "avatarClass": "dr1",
+      "date": "2025-10-24",
+      "displayDate": "Oct 24",
+      "time": "10:00 AM",
+      "reason": "Annual Check-up",
+      "status": "upcoming"
+    },
+    {
+      "id": "appt-002",
+      "patientName": "Sarah Connor",
+      "patientInitials": "SC",
+      "doctor": "Dr. Patel",
+      "doctorInitials": "P",
+      "avatarClass": "dr2",
+      "date": "2025-11-05",
+      "displayDate": "Nov 5",
+      "time": "01:00 PM",
+      "reason": "Cardiology Follow-up",
+      "status": "upcoming"
+    }
+  ],
+
+  "todaySchedule": [
+    {
+      "id": "sched-001",
+      "patientName": "Sarah Connor",
+      "patientInitials": "SC",
+      "avatarClass": "dr1",
+      "time": "09:00 AM",
+      "reason": "Annual Check-up",
+      "status": "checked-in"
+    },
+    {
+      "id": "sched-002",
+      "patientName": "James Holden",
+      "patientInitials": "JH",
+      "avatarClass": "dr2",
+      "time": "10:30 AM",
+      "reason": "Blood Pressure Review",
+      "status": "upcoming"
+    },
+    {
+      "id": "sched-003",
+      "patientName": "Naomi Nagata",
+      "patientInitials": "NN",
+      "avatarClass": "dr3",
+      "time": "01:00 PM",
+      "reason": "Diabetes Management",
+      "status": "pending"
+    },
+    {
+      "id": "sched-004",
+      "patientName": "Amos Burton",
+      "patientInitials": "AB",
+      "avatarClass": "dr1",
+      "time": "03:30 PM",
+      "reason": "Post-Surgery Follow-up",
+      "status": "upcoming"
+    }
+  ],
+
+  "patients": [
+    {
+      "id": "pat-001",
+      "name": "Sarah Connor",
+      "initials": "SC",
+      "avatarClass": "dr1",
+      "lastVisit": "Oct 10, 2025",
+      "condition": "General Practice"
+    },
+    {
+      "id": "pat-002",
+      "name": "James Holden",
+      "initials": "JH",
+      "avatarClass": "dr2",
+      "lastVisit": "Sep 28, 2025",
+      "condition": "Hypertension"
+    },
+    {
+      "id": "pat-003",
+      "name": "Naomi Nagata",
+      "initials": "NN",
+      "avatarClass": "dr3",
+      "lastVisit": "Oct 2, 2025",
+      "condition": "Type 2 Diabetes"
+    },
+    {
+      "id": "pat-004",
+      "name": "Amos Burton",
+      "initials": "AB",
+      "avatarClass": "dr1",
+      "lastVisit": "Oct 18, 2025",
+      "condition": "Post-Op Recovery"
+    }
+  ],
+
+  "educationResources": [
+    {
+      "id": "edu-001",
+      "title": "Understanding Your Blood Pressure Readings",
+      "category": "Cardiology",
+      "categoryColor": "blue",
+      "readTime": "5 min read",
+      "author": "Dr. Patel"
+    },
+    {
+      "id": "edu-002",
+      "title": "Managing Type 2 Diabetes Through Diet",
+      "category": "Nutrition",
+      "categoryColor": "teal",
+      "readTime": "8 min read",
+      "author": "Dr. Reynolds"
+    },
+    {
+      "id": "edu-003",
+      "title": "The Benefits of Regular Exercise on Heart Health",
+      "category": "Lifestyle",
+      "categoryColor": "amber",
+      "readTime": "6 min read",
+      "author": "Dr. Kim"
+    },
+    {
+      "id": "edu-004",
+      "title": "Sleep Hygiene: Why 8 Hours Matters",
+      "category": "Wellness",
+      "categoryColor": "teal",
+      "readTime": "4 min read",
+      "author": "Dr. Reynolds"
+    },
+    {
+      "id": "edu-005",
+      "title": "Recognising Early Signs of Neurological Conditions",
+      "category": "Neurology",
+      "categoryColor": "blue",
+      "readTime": "10 min read",
+      "author": "Dr. Kim"
+    },
+    {
+      "id": "edu-006",
+      "title": "Stress and Its Impact on Your Immune System",
+      "category": "Mental Health",
+      "categoryColor": "coral",
+      "readTime": "7 min read",
+      "author": "Dr. Patel"
+    }
+  ],
+
+  "chatMessages": [
+    {
+      "id": "msg-001",
+      "sender": "Dr. Reynolds",
+      "text": "Good morning, Sarah! Your test results from last week have come back. Everything looks great overall.",
+      "type": "received"
+    },
+    {
+      "id": "msg-002",
+      "sender": "You",
+      "text": "That's wonderful news! Should I still come in for my appointment on Oct 24?",
+      "type": "sent"
+    },
+    {
+      "id": "msg-003",
+      "sender": "Dr. Reynolds",
+      "text": "Yes, please do. We'll do a quick check-in and discuss a few preventative measures. Should only take about 20 minutes.",
+      "type": "received"
+    }
+  ],
+
+  "activityLog": [
+    {
+      "id": "log-001",
+      "icon": "appt",
+      "title": "New appointment booked",
+      "meta": "Sarah Connor → Dr. Reynolds · Oct 24, 10:00 AM",
+      "time": "2 min ago",
+      "badgeClass": "badge-upcoming"
+    },
+    {
+      "id": "log-002",
+      "icon": "checkin",
+      "title": "Patient checked in",
+      "meta": "James Holden · Dr. Reynolds",
+      "time": "18 min ago",
+      "badgeClass": "badge-checked-in"
+    },
+    {
+      "id": "log-003",
+      "icon": "record",
+      "title": "Medical record updated",
+      "meta": "Naomi Nagata · Diabetes Management Plan",
+      "time": "1 hr ago",
+      "badgeClass": "badge-pending"
+    },
+    {
+      "id": "log-004",
+      "icon": "msg",
+      "title": "Secure message sent",
+      "meta": "Dr. Reynolds → Sarah Connor",
+      "time": "2 hr ago",
+      "badgeClass": "badge-upcoming"
+    },
+    {
+      "id": "log-005",
+      "icon": "appt",
+      "title": "Appointment completed",
+      "meta": "Amos Burton · Post-Surgery Review",
+      "time": "3 hr ago",
+      "badgeClass": "badge-checked-in"
+    }
+  ],
+
+  "navigation": {
+    "patient": [
+      {
+        "section": "Main",
+        "items": [
+          { "id": "patient-dashboard", "label": "Dashboard", "icon": "home" },
+          { "id": "education-portal", "label": "Health Education", "icon": "book" },
+          { "id": "messaging-portal", "label": "Messages", "icon": "message" }
+        ]
+      }
+    ],
+    "doctor": [
+      {
+        "section": "Main",
+        "items": [
+          { "id": "doctor-dashboard", "label": "Dashboard", "icon": "home" },
+          { "id": "messaging-portal", "label": "Messages", "icon": "message" }
+        ]
+      }
+    ],
+    "admin": [
+      {
+        "section": "Main",
+        "items": [
+          { "id": "admin-dashboard", "label": "Analytics", "icon": "chart" }
+        ]
+      }
+    ]
+  }
+}
