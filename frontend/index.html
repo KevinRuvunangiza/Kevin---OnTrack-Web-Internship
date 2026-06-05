@@ -3,104 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medi-Connect | Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Medi-Connect | Healthcare Management</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <!-- Top Navigation with Glassmorphism effect -->
-    <header class="app-header">
-        <div class="logo">Medi-Connect</div>
-        <nav class="role-nav">
-            <!-- Buttons to toggle between role views for the prototype -->
-            <button class="nav-btn active" onclick="switchRole('patient')">Patient</button>
-            <button class="nav-btn" onclick="switchRole('doctor')">Doctor</button>
-            <button class="nav-btn" onclick="switchRole('admin')">Admin</button>
-        </nav>
-        <div class="user-profile">
-            <div class="avatar"></div>
+
+    <!-- LOGIN VIEW (Role-Based Access) -->
+    <div id="login-view" class="view-section active-view full-screen-flex">
+        <div class="login-card bento-card">
+            <div class="brand-header">
+                <div class="logo-icon"></div>
+                <h1>Medi-Connect</h1>
+                <p class="text-muted">Select a role to enter the portal</p>
+            </div>
+            <div class="login-actions">
+                <button class="btn btn-primary" onclick="login('patient')">Login as Patient</button>
+                <button class="btn btn-secondary" onclick="login('doctor')">Login as Doctor</button>
+                <button class="btn btn-outline" onclick="login('admin')">Login as Admin</button>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <main class="dashboard-container">
-        <!-- PATIENT DASHBOARD VIEW -->
-        <section id="patient-view" class="role-view active-view">
-            <header class="view-header">
-                <h1>Hello, Sarah</h1>
-                <p class="subtitle">Here is your health overview.</p>
-            </header>
-            
-            <div class="grid-layout">
-                <!-- Appointment Booking Card -->
-                <article class="card">
-                    <h2>Upcoming Appointments</h2>
-                    <div id="patient-appointments-list" class="list-container">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    <button class="primary-btn mt-4">Book New Appointment</button>
-                </article>
-
-                <!-- Health Education Portal Card -->
-                <article class="card">
-                    <h2>Health Resources</h2>
-                    <ul id="health-resources-list" class="resource-list">
-                        <!-- Populated by JavaScript -->
-                    </ul>
-                </article>
+    <!-- MAIN APP LAYOUT (Hidden until login) -->
+    <div id="app-layout" class="app-container hidden">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon small"></div>
+                <h2 class="sidebar-brand">Medi-Connect</h2>
             </div>
-        </section>
-
-        <!-- DOCTOR DASHBOARD VIEW -->
-        <section id="doctor-view" class="role-view">
-            <header class="view-header">
-                <h1>Dr. Reynolds Overview</h1>
-                <p class="subtitle">Your schedule for today.</p>
-            </header>
             
-            <div class="grid-layout">
-                <!-- Doctor Schedule Card -->
-                <article class="card">
-                    <h2>Today's Schedule</h2>
-                    <div id="doctor-schedule-list" class="list-container">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </article>
-
-                <!-- Patient Records Quick Access -->
-                <article class="card">
-                    <h2>Recent Patient Records</h2>
-                    <div id="doctor-patients-list" class="list-container">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    <button class="secondary-btn mt-4">Search All Records</button>
-                </article>
-            </div>
-        </section>
-
-        <!-- ADMIN DASHBOARD VIEW -->
-        <section id="admin-view" class="role-view">
-            <header class="view-header">
-                <h1>Clinic Administration</h1>
-                <p class="subtitle">System overview and analytics.</p>
-            </header>
+            <!-- Navigation links are dynamically populated by JS based on role -->
+            <nav id="dynamic-nav" class="nav-menu"></nav>
             
-            <div class="grid-layout admin-grid">
-                <!-- Analytics Cards -->
-                <article class="card stat-card">
-                    <h3>Total Appointments</h3>
-                    <p class="stat-number" id="stat-appointments">--</p>
-                </article>
-                <article class="card stat-card">
-                    <h3>Active Patients</h3>
-                    <p class="stat-number" id="stat-patients">--</p>
-                </article>
-                <article class="card stat-card">
-                    <h3>System Status</h3>
-                    <p class="stat-number status-online">Online</p>
-                </article>
+            <div class="sidebar-footer">
+                <button class="btn btn-text text-danger" onclick="logout()">Log Out</button>
             </div>
-        </section>
-    </main>
+        </aside>
 
-    <script src="script.js"></script>
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content">
+            <!-- Header for mobile menu toggle and user profile -->
+            <header class="top-header">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menu</button>
+                <div class="user-profile">
+                    <span id="user-greeting" class="font-medium">Welcome</span>
+                    <div class="avatar"></div>
+                </div>
+            </header>
+
+            <div class="scrollable-content">
+                
+                <!-- PATIENT DASHBOARD -->
+                <section id="patient-dashboard" class="view-section bento-grid">
+                    <div class="bento-card span-2">
+                        <h3>Book an Appointment</h3>
+                        <p class="text-muted mb-4">Schedule a visit with your healthcare provider.</p>
+                        <form class="booking-form" onsubmit="event.preventDefault(); alert('Appointment requested!');">
+                            <input type="date" class="form-input" required>
+                            <select class="form-input" required>
+                                <option value="" disabled selected>Select Doctor</option>
+                                <option>Dr. Reynolds (General)</option>
+                                <option>Dr. Patel (Cardiology)</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                        </form>
+                    </div>
+                    <div class="bento-card">
+                        <h3>Upcoming Visits</h3>
+                        <div id="patient-appts-list" class="data-list"></div>
+                    </div>
+                </section>
+
+                <!-- HEALTH EDUCATION PORTAL -->
+                <section id="education-portal" class="view-section bento-grid hidden">
+                    <div class="bento-card span-full">
+                        <h3>Health Education Resources</h3>
+                        <p class="text-muted mb-4">Curated medical information for your well-being.</p>
+                        <div id="education-list" class="grid-2-col"></div>
+                    </div>
+                </section>
+
+                <!-- SECURE MESSAGING -->
+                <section id="messaging-portal" class="view-section bento-grid hidden">
+                    <div class="bento-card span-full chat-container">
+                        <h3>Secure Inbox</h3>
+                        <div id="chat-history" class="chat-history"></div>
+                        <div class="chat-input-area">
+                            <input type="text" class="form-input" placeholder="Type a secure message...">
+                            <button class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DOCTOR DASHBOARD (Schedule & Records) -->
+                <section id="doctor-dashboard" class="view-section bento-grid hidden">
+                    <div class="bento-card span-2">
+                        <h3>Today's Schedule</h3>
+                        <div id="doctor-schedule-list" class="data-list"></div>
+                    </div>
+                    <div class="bento-card">
+                        <h3>Patient Directory</h3>
+                        <div id="patient-records-list" class="data-list"></div>
+                        <button class="btn btn-secondary mt-4 w-full">View All Records</button>
+                    </div>
+                </section>
+
+                <!-- ADMIN DASHBOARD -->
+                <section id="admin-dashboard" class="view-section bento-grid hidden">
+                    <div class="bento-card stat-card">
+                        <h4 class="text-muted">Total Appointments</h4>
+                        <div class="stat-value" id="stat-appts">0</div>
+                    </div>
+                    <div class="bento-card stat-card">
+                        <h4 class="text-muted">Active Patients</h4>
+                        <div class="stat-value" id="stat-patients">0</div>
+                    </div>
+                    <div class="bento-card stat-card">
+                        <h4 class="text-muted">System Status</h4>
+                        <div class="stat-value text-success">Optimal</div>
+                    </div>
+                    <div class="bento-card span-full">
+                        <h3>Recent System Activity</h3>
+                        <div id="admin-activity-list" class="data-list"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="./app.js"></script>
 </body>
 </html>
